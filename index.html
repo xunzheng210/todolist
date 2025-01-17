@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>新年祝福</title>
     <style>
       body {
         background: black;
@@ -20,44 +20,97 @@
       }
     </style>
     <style>
-        .typewriter {
-            position: absolute;
-            top: 20px;
-            color: #fff;
-             overflow: hidden; /* 隐藏超出元素范围的内容 */
-             border-right: 0.15em solid orange; /* 光标效果，使用橙色边框模拟光标 */
-             white-space: nowrap; /* 防止文字换行 */
-             margin: 0 auto; /* 水平居中 */
-             letter-spacing: 0.15em; /* 字符间距 */
-             animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-         }
- 
-         @keyframes typing {
-             from {
-                 width: 0; /* 开始时宽度为 0，文字不可见 */
-             }
-             to {
-                 width: 100%; /* 结束时宽度为 100%，文字完全显示 */
-             }
-         }
- 
-         @keyframes blink-caret {
-             from, to {
-                 border-color: transparent; /* 光标闪烁，透明和橙色交替 */
-             }
-             50% {
-                 border-color: orange;
-             }
-         }
-     </style>
+      .typewriter-container {
+        position: absolute;
+        top: 10px;
+        display: inline-block;
+        animation: blink-caret 0.75s step-end infinite;
+      }
+      .heart {
+        color: #E52B50;
+      }
+
+      .typewriter-text {
+        letter-spacing: 2px;
+        font-size: 1.1rem;
+        color: #fff;
+        display: inline-block;
+        overflow: hidden;
+        white-space: pre-wrap; /* 保留空格和换行符 */
+        animation: typing 10s steps(40, end);
+      }
+
+      @keyframes typing {
+        from {
+          max-height: 0; /* 从 0 高度开始，隐藏文本 */
+        }
+        to {
+          max-height: 1000px; /* 最大高度足够大，以显示全部文本，可根据需要调整 */
+        }
+      }
+
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent; /* 光标闪烁，透明和橙色交替 */
+        }
+        50% {
+          border-color: orange;
+        }
+      }
+    </style>
   </head>
   <body>
     <div>
-        <div class="typewriter">
-            一二三四五六七八九十一二三四五六七八九十
+      <div class="typewriter-container">
+        <div class="typewriter-text">
+          亲爱的 <span class="name">xxx</span>
+
+          2025 年到啦 
+          祝你新年快乐哦 
+          愿这一年里
+          你的笑容更加灿烂
+          生活更加甜蜜
+          所有的愿望都能实现 
+          所有的努力都有回报
+          无论何时何地
+          都能保持那份独特的魅力 
+          我会一直在你身边，为你加油
+          新的一年
+          让我们一起创造更多美好回忆 
+          一起迎接更多的幸福和快乐
+          <span class="heart" >❤❤❤❤❤❤❤❤❤❤❤❤</span>
         </div>
+      </div>
       <canvas id="canvas"></canvas>
     </div>
+    <script>
+      let currentName = "";
+      function getQueryParams() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var name = urlParams.get("name");
+        var age = urlParams.get("age");
+        currentName = name;
+        console.log("Name:", name);
+        console.log("Age:", age);
+      }
+      // 调用函数
+      getQueryParams();
+      console.info("currentName", currentName);
+      var outputElement = document.getElementsByClassName("name")[0];
+      outputElement.textContent = currentName;
+    </script>
+    <script>
+      window.onload = function () {
+        var text = document.getElementById("typewriterText");
+        var lines = text.textContent.split("\n").length;
+        var averageLineLength = text.textContent.length / lines;
+        var steps = text.textContent.length;
+        var duration = steps / 10; // 假设每秒显示 10 个字符
+        text.style.setProperty("--typing-steps", steps);
+        text.style.setProperty("--typing-duration", duration + "s");
+      };
+    </script>
     <script>
       window.addEventListener("resize", resizeCanvas, false);
       window.addEventListener("DOMContentLoaded", onLoad, false);
